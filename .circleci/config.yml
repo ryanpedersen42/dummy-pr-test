@@ -1,3 +1,4 @@
+  
 version: 2.1
 jobs: 
   test: 
@@ -11,14 +12,13 @@ jobs:
             else
               base_branch=$CIRCLE_BRANCH
             fi    
-            echo "checking some things"
+            echo "testing some things"
             echo "PR NUMBER..."
             echo $CIRCLE_PR_NUMBER   
             echo "BASE BRANCH..."
             echo $base_branch
             echo "just number"
             echo ${CIRCLE_PULL_REQUEST##*/}
-
       - run: 
           command: |
             curl -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$CIRCLE_PR_NUMBER | jq -r '.base.ref'
