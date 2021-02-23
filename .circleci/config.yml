@@ -7,10 +7,14 @@ jobs:
       - run: 
           command: |
             if [ -n ${CIRCLE_PR_NUMBER:-} ]; then
-              local base_branch=$(curl -fsSL https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$CIRCLE_PR_NUMBER | jq -r '.base.ref')
+              base_branch=base_branch=$(curl -fsSL https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/$CIRCLE_PR_NUMBER | jq -r '.base.ref')
             else
-              local base_branch=$CIRCLE_BRANCH
+              base_branch=$CIRCLE_BRANCH
             fi         
+            echo "PR NUMBER..."
+            echo ${CIRCLE_PR_NUMBER}   
+            echo "BASE BRANCH..."
+            echo $base_branch
 workflows:
   branch-test:
     jobs:
