@@ -12,6 +12,11 @@ jobs:
             else
               base_branch=$CIRCLE_BRANCH
             fi    
+            if [[ -n ${CIRCLE_PR_NUMBER} ]]; then
+              base_branch=$(curl -H "Authorization: token ${GH_TOKEN}" https://api.github.com/repos/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pulls/${CIRCLE_PULL_REQUEST##*/} | jq -r '.base.ref')
+            else
+              base_branch=$CIRCLE_BRANCH
+            fi 
             echo "testing things"
             echo "PR NUMBER..."
             echo $CIRCLE_PR_NUMBER   
