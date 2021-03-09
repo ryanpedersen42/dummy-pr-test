@@ -23,4 +23,4 @@ jobs:
           curl --request POST \
             --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
             --header 'content-type: application/json' \
-            --header 'Circle-Token: $CIRCLE_API_TOKEN' \
+            --header 'Circle-Token: ${CIRCLE_API_TOKEN}' \
