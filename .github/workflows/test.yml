@@ -15,7 +15,12 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check length
         run: |
+          echo "First"
+          expr length $GITHUB_WORKSPACE
+
+          echo "Second"
           expr length $CIRCLE_API_TOKEN
+
       - name: Run a one-line script
         run: |
           curl --request POST \
