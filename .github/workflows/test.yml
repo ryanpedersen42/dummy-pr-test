@@ -13,17 +13,27 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Check length
-        run: |
-          echo "First"
-          expr length $GITHUB_WORKSPACE
-
-          echo "Second"
-          expr length $CIRCLE_API_TOKEN
-
-      - name: Run a one-line script
+      - name: Call API 1
         run: |
           curl --request POST \
             --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
             --header 'content-type: application/json' \
             --header 'Circle-Token: $CIRCLE_API_TOKEN' \
+      - name: Call API 2
+        run: |
+          curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
+            --header 'content-type: application/json' \
+            --header 'Circle-Token: ${CIRCLE_API_TOKEN}' \
+      - name: Call API 3
+        run: |
+          curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
+            --header 'content-type: application/json' \
+            --header 'Circle-Token: CIRCLE_API_TOKEN' \
+      - name: Call API 4
+        run: |
+          curl --request POST \
+            --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
+            --header 'content-type: application/json' \
+            --header `Circle-Token: ${CIRCLE_API_TOKEN}` \
