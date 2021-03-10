@@ -4,16 +4,16 @@ on: pull_request
 
 jobs:
   build:
+    env: 
+      CIRCLE_API_TOKEN: ${{ secrets.CIRCLE_API_TOKEN }}
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: set envars
-        run: |
-          echo "export TOKEN=$CIRCLE_API_TOKEN" >> $BASH_ENV
-      - name: call API
+
+      - name: Run a one-line script
         run: |
           curl --request POST \
             --url https://circleci.com/api/v2/project/gh/ryanpedersen42/dummy-pr-test/pipeline \
             --header 'content-type: application/json' \
-            --header 'Circle-Token: ${TOKEN}' \
+            --header 'Circle-Token: "$CIRCLE_API_TOKEN"' \
